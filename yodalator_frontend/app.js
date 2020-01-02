@@ -4,11 +4,6 @@
 // }
 // let voices = await getVoices()
 try {
-
-  // const getVoices = async ()=>{
-  //   const synth = window.speechSynthesis;
-  //   return synth.getVoices();
-  // }
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = new SpeechRecognition();
@@ -57,7 +52,7 @@ try {
     const typingIndicator = document.querySelector("#user-typing-indicator");
     typingIndicator.remove();
     const div = document.createElement("div");
-  
+
     const h7 = document.createElement("h7");
     div.id = "user";
     div.classList = "bubble bubble-alt";
@@ -122,6 +117,7 @@ try {
   // }
 
   function respCheck(message) {
+    const digiTypingIndicator = document.querySelector("#digi-typing-indicator")
     if (message.response === "weather-fetch") {
       fetch(
         "http://api.weatherstack.com/current?access_key=2177c35a94493c2c4653396c54d910f3&query=London"
@@ -129,21 +125,59 @@ try {
         .then(resp => resp.json())
         .then(resp => {
           message.response = `It is ${resp.current.temperature} degrees celcius in ${resp.location.name} right now`;
+          digiTypingIndicator.remove()
           speakResp(message);
         });
+    } else if (message.response === "chuck-norris-fact") {
+      fetch(
+        "https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random",
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-host":
+              "matchilling-chuck-norris-jokes-v1.p.rapidapi.com",
+            "x-rapidapi-key":
+              "36d86838d4mshba08a92dbba7104p1ae352jsnf92cd7cb9983",
+            accept: "application/json"
+          }
+        }
+      )
+        .then(resp => resp.json())
+        .then(resp => {
+          message.response = resp.value;
+          digiTypingIndicator.remove()
+          speakResp(message);
+        });
+    } else if (message.response === "joke-fetch") {
+      fetch("https://jokeapi.p.rapidapi.com/category/Dark?format=json", {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "jokeapi.p.rapidapi.com",
+          "x-rapidapi-key": "f652747ea9msh8bd6156ff67ddffp17ca66jsn5c07f068298a"
+        }
+      }).then(resp => resp.json()).then(resp => {
+        message.response = resp.setup
+        speakResp(message)
+        digiTypingIndicator.remove()
+        speakJokeDelivery(resp)
+      });
+      function speakJokeDelivery(resp) {
+        setTimeout(function(){
+          message.response = resp.delivery
+          speakResp(message)
+          ; }, 4000)
+      }
     } else {
+      digiTypingIndicator.remove()
       speakResp(message);
     }
   }
 
-  speakResp = async (message) => {
+  speakResp = async message => {
     console.log(message);
     //create and write message in response bubble
 
-    const digiTypingIndicator = document.querySelector(
-      "#digi-typing-indicator"
-    );
-    digiTypingIndicator.remove();
+    
     const div = document.createElement("div");
     const h7 = document.createElement("h7");
     div.id = "digi";
@@ -155,9 +189,9 @@ try {
     let speech = new SpeechSynthesisUtterance();
 
     // Set the text and voice attributes.
-  
-    console.log(voices) 
-    
+
+    // console.log(voices)
+
     speech.text = message.response;
     speech.volume = 1;
     speech.rate = 1;
@@ -165,7 +199,7 @@ try {
     // speech.voice="Google UK English Male";
 
     window.speechSynthesis.speak(speech);
-  }
+  };
 } catch (e) {
   console.error(e);
   $(".no-browser-support").show();

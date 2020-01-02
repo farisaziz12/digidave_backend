@@ -162,7 +162,7 @@ body{font-size: 15px;}
 .gn{
   position:relative;
   margin: 5% auto;
-  background-color:#FE2222;
+  background-color:rgb(76, 116, 226);
   border-radius:50%;
   width:10em; height:10em;
 }
@@ -210,7 +210,7 @@ body{font-size: 15px;}
 }
 .mic-container {
     width:150px;
-    background-color:#e74c3c;
+    background-color:#357af8;
     display:block;
     margin:100px auto 0px auto;
     border-radius:100%;
