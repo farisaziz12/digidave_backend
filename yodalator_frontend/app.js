@@ -13,10 +13,6 @@
           
           recognition.onspeechend = function() {
             instructions.textContent = 'You were quiet for a while so voice recognition turned itself off.'
-            //send to yoda api here
-            let org_text = noteTextarea.value
-            yodaTranslate(org_text)
-
           }
           
           recognition.onerror = function(event) {
@@ -37,6 +33,22 @@
           function response(transcript){
             noteContent += transcript;
             noteTextarea.value = noteContent;
+
+            //send to yoda api here
+            let org_text = noteTextarea.value
+            // yodaTranslate(org_text)
+
+            //send to backend for response here
+            fetch(`http://localhost:3000/queries`, {
+              method: "POST", 
+              headers: { "Content-Type": "application/json" },
+              "body": 
+               JSON.stringify({
+                    request: org_text,
+                    user_id: 1
+                })
+            }).then(resp => resp.json()).then(resp => yodaTranslate(resp))
+
           }
 
     const startBtn = document.querySelector("#start-record-btn")
@@ -47,8 +59,8 @@
 
    
 
-    function yodaTranslate(org_text){
-      let splitText = org_text.split(" ")
+    function yodaTranslate(message){
+      let splitText = message.response.split(" ")
 
       let urlReadyText = splitText.join("%20")
       console.log(urlReadyText)
@@ -61,10 +73,23 @@
           "content-type": "application/x-www-form-urlencoded"
         },
         "body": {}
-      }).then(resp => resp.json()).then(resp => noteTextarea.value = resp.contents.translated)
+      }).then(resp => resp.json()).then(resp => speakResp(resp.contents.translated))
     }
-        
+
+    function speakResp(message) {
+      console.log(message)
+        let speech = new SpeechSynthesisUtterance();
+
+        // Set the text and voice attributes.
+        speech.text = message;
+        speech.volume = 1;
+        speech.rate = 1;
+        speech.pitch = 1;
+  
+        window.speechSynthesis.speak(speech);
       }
+    }
+
       catch(e) {
         console.error(e);
         $('.no-browser-support').show();
@@ -72,9 +97,3 @@
       }
     
     
-    
-    
-
-
-
-

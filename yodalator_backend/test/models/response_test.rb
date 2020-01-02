@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TranslationTest < ActiveSupport::TestCase
+class ResponseTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
