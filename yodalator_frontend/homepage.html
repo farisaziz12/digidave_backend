@@ -13,24 +13,35 @@
     <body>
         <div class="container">
 
-            <h1>DigiYoda</h1>
-            <h3>Your friendly digital master of the force</h3>
+            <h1 class="text-align">DigiYoda</h1>
+            <h3 class="text-align" >Your friendly digital master of the force</h3>
 
-            <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This In Google Chrome.</h3>
+            <h3 class="no-browser-support text-align">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This In Google Chrome.</h3>
 
             <div class="app"> 
-                <h3>Ask Yoda</h3>
-                <div class="input-single">
-                    <textarea id="note-textarea" placeholder="Create a new request using voice recognition." rows="6"></textarea>
-                </div>         
-                <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-                <!-- <button id="clearBtn" title="Clear">Clear</button> -->
-                <!-- <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button> -->
-                <!-- <button id="save-note-btn" title="Save Note">Save Note</button>    -->
-                <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+                <h3 class="text-align">Ask Yoda</h3>
+
+                    <div id="digichat">
+
+                        <div id="user" class="bubble bubble-alt">
+                            <h7>Create a new request using voice recognition.</h7>
+                        </div>
+                        
+                    </div><br><br><br><br>
+                    
+
+                </div> 
+
+           
+                <div id="start-record-btn" class="gn mic-container">
+                    <div class="mc">
+                    </div>
+                </div>
+
+                <p class="text-align" id="recording-instructions">Press the <strong>Mic</strong> button and allow access.</p>
                 
-                <h3>My Requests</h3>
-                <ul id="translations">
+                <h3 class="text-align">My Requests</h3>
+                <ul class="text-align" id="translations">
                     <li>
                         <p class="no-translations">You don't have any requests.</p>
                     </li>

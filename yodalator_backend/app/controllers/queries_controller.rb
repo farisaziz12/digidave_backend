@@ -23,6 +23,10 @@ class QueriesController < ApplicationController
     elsif req == "what's up" || req == "what is up"
 
       response = "Not much. What's up with you?"
+
+    elsif req.include?("weather")
+      response = "weather-fetch"
+
     else 
       response = "Sorry, I don't know how to respond to that"
     end
