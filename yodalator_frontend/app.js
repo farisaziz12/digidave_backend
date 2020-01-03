@@ -9,6 +9,7 @@ try {
   const recognition = new SpeechRecognition();
   let messageContent = "";
   const userMessage = document.querySelector("#user");
+  const userDiv = document.querySelector("#userDiv")
   const chat = document.querySelector("#digichat");
 
   const instructions = document.querySelector("#recording-instructions");
@@ -17,14 +18,14 @@ try {
     instructions.textContent =
       "Voice recognition activated. Try speaking into the microphone.";
     userMessage.remove();
-    const div = document.createElement("div");
-    div.id = "user-typing-indicator";
-    const span1 = document.createElement("span");
-    const span2 = document.createElement("span");
-    const span3 = document.createElement("span");
-    div.classList = "typing-indicator-right";
-    div.append(span1, span2, span3);
-    chat.append(div);
+    let loadingCircle = null
+    if (loadingCircle === null) {
+      userDiv.classList = "div text-align"
+      loadingCircle = document.createElement("button")
+      loadingCircle.classList = "button"
+      loadingCircle.id = "loadingCircle"
+      userDiv.append(loadingCircle);
+    }
   };
 
   recognition.onspeechend = function() {
@@ -49,7 +50,7 @@ try {
   function response(transcript) {
     messageContent = transcript;
 
-    const typingIndicator = document.querySelector("#user-typing-indicator");
+    const typingIndicator = document.querySelector("#loadingCircle");
     typingIndicator.remove();
     const div = document.createElement("div");
 
@@ -60,16 +61,16 @@ try {
     div.append(h7);
     chat.append(div);
 
-    //digiyoda response text indicator
+    //digiDave response text indicator
 
     const digidiv = document.createElement("div");
     digidiv.id = "digi-typing-indicator";
-    const span1 = document.createElement("span");
-    const span2 = document.createElement("span");
-    const span3 = document.createElement("span");
-    digidiv.classList = "typing-indicator";
-    digidiv.append(span1, span2, span3);
-    chat.append(digidiv);
+    userDiv.classList = "div text-align"
+    const loadingCircle = document.createElement("button")
+    loadingCircle.classList = "button text-align"
+    loadingCircle.id = "DigiloadingCircle"
+    chat.append(loadingCircle);
+    chat.append(digidiv)
 
     //send to backend for response here
     let org_text = h7.textContent;
@@ -149,23 +150,19 @@ try {
           speakResp(message);
         });
     } else if (message.response === "joke-fetch") {
-      fetch("https://jokeapi.p.rapidapi.com/category/Dark?format=json", {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "jokeapi.p.rapidapi.com",
-          "x-rapidapi-key": "f652747ea9msh8bd6156ff67ddffp17ca66jsn5c07f068298a"
-        }
-      }).then(resp => resp.json()).then(resp => {
-        message.response = resp.setup
+      fetch("https://official-joke-api.appspot.com/jokes/programming/random").then(resp => resp.json()).then(resp => {
+        console.log(resp)
+        message.response = resp[0].setup
+        console.log(message.response)
         speakResp(message)
         digiTypingIndicator.remove()
         speakJokeDelivery(resp)
       });
       function speakJokeDelivery(resp) {
         setTimeout(function(){
-          message.response = resp.delivery
+          message.response = resp[0].punchline
           speakResp(message)
-          ; }, 4000)
+          ; }, 4500)
       }
     } else {
       digiTypingIndicator.remove()
@@ -177,7 +174,10 @@ try {
     console.log(message);
     //create and write message in response bubble
 
-    
+    const digidiv = document.querySelector("#DigiloadingCircle")
+    if (digidiv !== null) {
+      digidiv.remove()
+    }
     const div = document.createElement("div");
     const h7 = document.createElement("h7");
     div.id = "digi";

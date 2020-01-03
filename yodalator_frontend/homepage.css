@@ -128,7 +128,7 @@ button:focus {
   
 
   .bubble-alt {
-    right:-1000px;
+    right:-1050px;
   }
   .bubble-alt:before {
     left: auto;
@@ -152,6 +152,7 @@ button:focus {
     background-image: -o-linear-gradient(bottom, #98db78 15%, #7acd47 100%);
     background-image: linear-gradient(bottom, #98db78 15%, #7acd47 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#7acd47', endColorstr='#98db78');
+    right: -550px;
   }
   /* bubble end */
 
@@ -365,8 +366,8 @@ body{
     border-radius: 30%;
     padding: 1rem 1.5rem 2rem;
     position: absolute;
-    top: 190px;
-    left: 1100px;
+    /* top: 470px; */
+    /* left: 1100px; */
     animation: 2s pulse infinite ease-out;
 }
 
@@ -424,7 +425,7 @@ body{
 .animation-area{
     background: linear-gradient(to left, #8942a8, #ba382f);
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 .box-area{
@@ -437,7 +438,7 @@ body{
 }
 
 .box-area li{
-    position: absolute;
+    position: fixed;
     display: block;
     list-style: none;
     width: 25px;
@@ -554,6 +555,35 @@ body{
   
 /* wave title end  */
 
-/* hover letters */
+/* h3 letters */
+h3 { color: #fff; font-family: 'Righteous', cursive; font-size: 45px; font-weight: normal; line-height: 60px; margin: 10px 0 20px; text-transform: uppercase; }
 
-/* hover letters end */
+
+/* h3 letters end */
+
+/* loading circle */
+
+.button {
+    height:40px;
+    width: 40px;
+    background: #151825;
+    opacity: 0.75;
+    border-radius: 50%;
+    border: 1px solid rgb(242, 29, 100);
+    border-top: 2px solid #fff;
+    animation: spinner1 600ms linear infinite;
+    right: -1000px;
+    }
+    @keyframes spinner1 {
+    to {
+    transform: rotate(360deg);
+    }
+    }
+
+.div {
+    border-left: 100px;
+    border-right: 100px;
+}
+
+
+/* loading circle end */

@@ -17,7 +17,7 @@ class QueriesController < ApplicationController
 
   def generate_response
     req = params[:request]
-    if req == "hello" || req == "hi"
+    if req.include?("hello") || req.include?("hi")
       response = "Hi, how may I help you?"
 
     elsif req == "what's up" || req == "what is up"
@@ -45,6 +45,9 @@ class QueriesController < ApplicationController
     elsif req.include?("joke")
       response = "joke-fetch"
       
+    elsif req.include?("name")
+      response = "My name is Dave"
+
 
     else 
       response = "Sorry, I don't know how to respond to that"
