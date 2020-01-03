@@ -128,7 +128,7 @@ button:focus {
   
 
   .bubble-alt {
-    float: right;
+    right:-1000px;
   }
   .bubble-alt:before {
     left: auto;
@@ -158,7 +158,8 @@ button:focus {
 
 /* mic button */
 
-body{font-size: 15px;}
+body{
+    font-size: 15px;}
 .gn{
   position:relative;
   margin: 5% auto;
@@ -210,7 +211,7 @@ body{font-size: 15px;}
 }
 .mic-container {
     width:150px;
-    background-color:#357af8;
+    background-color:#e74c3c;
     display:block;
     margin:100px auto 0px auto;
     border-radius:100%;
@@ -219,6 +220,8 @@ body{font-size: 15px;}
     transition:.3s all ease-in;
     position:relative;
 }
+
+
 .icon-microphone {
     color:white;
     font-size:60px;
@@ -229,6 +232,8 @@ body{font-size: 15px;}
 }
 .mic-container:hover {
     background-color:#27ae60;
+    animation: swing 1s ease;
+    animation-iteration-count: 1;
 }
 .mic-container:active {
     background-color:#e74c3c;
@@ -236,11 +241,33 @@ body{font-size: 15px;}
 .mic-container:active .icon-microphone {
     color:#ecf0f1;
 }
+
+@keyframes swing {
+    15% {
+    transform: translateX(5px);
+    }
+    30% {
+    transform: translateX(-5px);
+    }
+    50% {
+    transform: translateX(3px);
+    }
+    65% {
+    transform: translateX(-3px);
+    }
+    80% {
+    transform: translateX(2px);
+    }
+    100% {
+    transform: translateX(0);
+    }
+}
+
 /* mic button end */
 
-/* background image */
+/* background image (disabled)*/
 
-  body:after {
+  /* body:after {
     content : "";
     display: block;
     position: absolute;
@@ -254,7 +281,7 @@ body{font-size: 15px;}
     height: 132%;
     opacity : 0.5;
     z-index: -1;
-  }
+  } */
 
 
 
@@ -338,8 +365,8 @@ body{font-size: 15px;}
     border-radius: 30%;
     padding: 1rem 1.5rem 2rem;
     position: absolute;
-    top: 275px;
-    left: 630px;
+    top: 190px;
+    left: 1100px;
     animation: 2s pulse infinite ease-out;
 }
 
@@ -390,3 +417,143 @@ body{font-size: 15px;}
 
 
 /* typing indicator end */
+
+
+/* background animation */
+
+.animation-area{
+    background: linear-gradient(to left, #8942a8, #ba382f);
+    width: 100%;
+    height: 100vh;
+}
+
+.box-area{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.box-area li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    background: rgba(255,255,255,0.2);
+    animation: animate 20s linear infinite;
+    bottom: -150px;
+}
+
+.box-area li:nth-child(1){
+    left: 86%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+.box-area li:nth-child(2){
+    left: 12%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 1.5s;
+    animation-duration: 10s;
+}
+.box-area li:nth-child(3){
+    left: 70%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 5.5s;
+}
+.box-area li:nth-child(4){
+    left: 42%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+}
+.box-area li:nth-child(5){
+    left: 65%;
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+}
+
+
+.box-area li:nth-child(6){
+    left: 15%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3.5s;
+}
+
+@keyframes animate{
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(-800px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* background animation end */
+
+/* wave title */
+
+  
+  .loading {
+    text-transform: uppercase;
+    font-family: 'Cabin Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 100pt;
+    text-align: center;
+    height: 120px;
+    line-height: 110px;
+    /* vertical-align: bottom; */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    bottom: 0;
+    display: block;
+  }
+  
+  @keyframes wave-animation {
+    0% {
+      background-position: 0 bottom;
+    }
+    100% {
+      background-position: 200px bottom;
+    }
+  }
+  @keyframes loading-animation {
+    0% {
+      background-size: 200px 0px;
+    }
+    100% {
+      background-size: 200px 200px;
+    }
+  }
+  .wave {
+    background-image: url("https://i.imgur.com/uFpLbYt.png");
+    -moz-background-clip: text;
+    -o-background-clip: text;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 0px rgba(255, 255, 255, 0.06);
+    animation: wave-animation 1s infinite linear, loading-animation 10s infinite linear alternate;
+    background-size: 200px 100px;
+    background-repeat: repeat-x;
+    opacity: 1;
+  }
+  
+/* wave title end  */
+
+/* hover letters */
+
+/* hover letters end */
