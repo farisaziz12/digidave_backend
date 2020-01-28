@@ -1,1 +1,3 @@
-# yodalator
+# DigiDave
+
+A multi purpouse digital assistant
