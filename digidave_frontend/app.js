@@ -79,7 +79,7 @@ try {
   }
   function timeoutToBackendSend(org_text) {
     setTimeout(function backendSend() {
-      fetch(`http://localhost:3000/queries`, {
+      fetch(`https://digidave.herokuapp.com/queries`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -163,6 +163,7 @@ try {
           speakJokeDelivery(resp);
         });
       function speakJokeDelivery(resp) {
+        console.log(resp)
         setTimeout(function() {
           message.response = resp[0].punchline;
           speakResp(message);
